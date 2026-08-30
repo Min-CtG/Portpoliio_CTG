@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exhibition | 3D Gaussian Splatting</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+</head>
+<body class="artworks-page">
+    <!-- Navigation -->
+    <nav class="nav-glass">
+        <div class="logo"><a href="index.html">CreatorTheGaphi<span>.</span></a></div>
+        <ul class="nav-links">
+            <li><a href="index.html#vision">Vision</a></li>
+            <li><a href="exhibition.html">Exhibition</a></li>
+            <li><a href="artworks.html" class="active">Artworks</a></li>
+            <li><a href="index.html#commission" class="btn-contact">Commission</a></li>
+        </ul>
+    </nav>
+
+    <!-- ???”ë©´ê³??™ì¼??ë°°ê²½ ìº”ë²„??ì¶”ê? (?¤í¬ë¡???êµ¬ê? ?¼ì?ê³?ë¨¼ì?ê°€ ?¨ëŠ” ?¨ê³¼) -->
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="exhibition-hero" style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
+        <h1 class="reveal-text">THE ARTWORKS</h1>
+        <p class="reveal-text" style="font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 1rem auto; text-align: center;">
+            A collection of traditional and digital paintings exploring color, form, and emotion.
+        </p>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator" style="position: absolute; bottom: 40px; display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0.6; animation: fadeBob 2s infinite;">
+            <span style="font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">Scroll Down</span>
+            <div style="width: 1px; height: 40px; background: currentColor;"></div>
+        </div>
+    </div>
+
+    <!-- Painting Grid (Card Deck Style) -->
+    <section class="portfolio-deck">
+        
+        <!-- Artwork 01 -->
+        <div class="portfolio-card" onclick="openProject('painting1')">
+            <div class="card-image-placeholder" style="background: linear-gradient(45deg, #1a1a2e, #16213e);">
+                [ Image Placeholder ]
+            </div>
+            <div class="card-info">
+                <p>2023</p>
+                <h3>Midnight Serenade</h3>
+            </div>
+        </div>
+
+        <!-- Artwork 02 -->
+        <div class="portfolio-card" onclick="openProject('painting2')">
+            <div class="card-image-placeholder" style="background: linear-gradient(45deg, #0f2027, #203a43);">
+                [ Image Placeholder ]
+            </div>
+            <div class="card-info">
+                <p>2024</p>
+                <h3>Abstract Thoughts</h3>
+            </div>
+        </div>
+
+        <!-- Artwork 03 -->
+        <div class="portfolio-card" onclick="openProject('painting3')">
+            <div class="card-image-placeholder" style="background: linear-gradient(45deg, #2b1055, #7597de);">
+                [ Image Placeholder ]
+            </div>
+            <div class="card-info">
+                <p>2024</p>
+                <h3>Echoes of the Past</h3>
+            </div>
+        </div>
+
+        <!-- Artwork 04 -->
+        <div class="portfolio-card" onclick="openProject('painting4')">
+            <div class="card-image-placeholder" style="background: linear-gradient(45deg, #112233, #445566);">
+                [ Image Placeholder ]
+            </div>
+            <div class="card-info">
+                <p>2025</p>
+                <h3>Uncharted Territory</h3>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Modal Backdrop -->
+    <div id="modal-backdrop" class="modal-backdrop" onclick="closeProject()"></div>
+
+    <!-- Bottom Drawer Project Modal -->
+    <div id="project-modal" class="project-modal" data-lenis-prevent>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeProject()">Ã—</button>
+            <div class="text-block" style="text-align: center; margin-bottom: 4rem;">
+                <h2 id="modal-subtitle" class="section-subtitle">2024</h2>
+                <h3 id="modal-title" class="section-title">Artwork Title</h3>
+                
+                <div style="margin: 2rem auto; width: 100%; max-width: 800px; background: #111; border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                    <!-- ?¬ê¸°???¤ì œ ?‘í’ˆ ?´ë?ì§€ë¥??£ìœ¼?¸ìš” -->
+                    <img id="modal-image" src="" alt="Artwork" style="width: 100%; height: auto; display: none;">
+                    <span id="modal-img-placeholder" style="padding: 4rem; color: #555;">[ Full Resolution Image Here ]</span>
+                </div>
+                
+                <p id="modal-desc" style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; max-width: 800px; margin: 0 auto;">
+                    Artwork description goes here.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 EE.ART. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+    <!-- ?´í‚¹(CORS) ë°©ì??©ìœ¼ë¡?ë³€?˜ëœ ì¡°ê°???°ì´??-->
+    <script src="faceData.js"></script>
+    <script src="lucyData.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Artwork Data
+        const artworks = {
+            'painting1': {
+                sub: '2023',
+                title: 'Midnight Serenade',
+                desc: 'A deep exploration of nocturnal colors and quiet solitude. Painted with acrylic on canvas, this piece represents the calm before the dawn.'
+            },
+            'painting2': {
+                sub: '2024',
+                title: 'Abstract Thoughts',
+                desc: 'An abstract interpretation of the complex human mind, utilizing bold strokes and contrasting hues to convey conflicting emotions.'
+            },
+            'painting3': {
+                sub: '2024',
+                title: 'Echoes of the Past',
+                desc: 'A nostalgic piece blending surrealism with classical portraiture techniques. The artwork invites viewers to reflect on their own memories.'
+            },
+            'painting4': {
+                sub: '2025',
+                title: 'Uncharted Territory',
+                desc: 'A futuristic landscape combining digital painting techniques with traditional textures, envisioning a world where technology and nature intertwine.'
+            }
+        };
+
+        const modal = document.getElementById('project-modal');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const modalSub = document.getElementById('modal-subtitle');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+        const modalImg = document.getElementById('modal-image');
+        const modalPlaceholder = document.getElementById('modal-img-placeholder');
+
+        function openProject(id) {
+            const data = artworks[id];
+            modalSub.innerText = data.sub;
+            modalTitle.innerText = data.title;
+            modalDesc.innerText = data.desc;
+            
+            if(data.image) {
+                modalImg.src = data.image;
+                modalImg.style.display = 'block';
+                modalPlaceholder.style.display = 'none';
+            } else {
+                modalImg.style.display = 'none';
+                modalPlaceholder.style.display = 'block';
+            }
+            
+            modal.classList.add('active');
+            modalBackdrop.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            if (window.lenis) window.lenis.stop();
+        }
+
+        function closeProject() {
+            modal.classList.remove('active');
+            modalBackdrop.classList.remove('active');
+            document.body.style.overflow = '';
+            if (window.lenis) window.lenis.start();
+        }
+    </script>
+</body>
+</html>
