@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exhibition | 3D Gaussian Splatting</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -14,17 +14,32 @@
 </head>
 <body class="exhibition-page">
     <!-- Navigation -->
-    <nav class="nav-glass">
+        <nav class="nav-glass" style="justify-content: flex-start; gap: 1.5rem;">
+        <div class="menu-btn" onclick="toggleSidebar()">
+            <div class="h-line"></div>
+            <div class="h-line"></div>
+            <div class="h-line"></div>
+        </div>
         <div class="logo"><a href="index.html">CreatorTheGaphi<span>.</span></a></div>
-        <ul class="nav-links">
-            <li><a href="index.html#vision">Vision</a></li>
-            <li><a href="exhibition.html" class="active">Exhibition</a></li>
-            <li><a href="artworks.html">Artworks</a></li>
-            <li><a href="index.html#commission" class="btn-contact">Commission</a></li>
-        </ul>
     </nav>
 
-    <!-- ???�면�??�일??배경 캔버??추�? (?�크�???구�? ?��?�?먼�?가 ?�는 ?�과) -->
+    <!-- Sidebar Overlay -->
+    <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+    
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar" data-lenis-prevent>
+        <div class="sidebar-header">
+            <button class="close-btn" onclick="toggleSidebar()">×</button>
+        </div>
+        <ul class="sidebar-links">
+            <li><a href="index.html#vision" onclick="toggleSidebar()">Vision</a></li>
+            <li><a href="exhibition.html">Exhibition</a></li>
+            <li><a href="artworks.html">Artworks</a></li>
+            <li><a href="index.html#commission" onclick="toggleSidebar()">Commission</a></li>
+        </ul>
+    </div>
+
+    <!-- ???면??일??배경 캔버??추? (?크???구? ???먼?가 ?는 ?과) -->
     <canvas id="bg-canvas"></canvas>
 
     <!-- Exhibition Header -->
@@ -100,14 +115,21 @@
         </div>
     </div>
 
+    
+    <!-- Back to Main Button -->
+    <div class="back-to-main" style="display: flex; flex-direction: column; align-items: center; padding: 5rem 0 10rem 0; position: relative; z-index: 10;">
+        <div style="width: 1px; height: 150px; background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.7)); margin-bottom: 2rem;"></div>
+        <a href="index.html" class="btn-primary" style="background: transparent; border: 1px solid var(--primary-color);">BACK TO MAIN</a>
+    </div>
+    
     <footer>
-        <p>&copy; 2026 EE.ART. All rights reserved.</p>
+        <p>&copy; 2026 CreatorTheGaphi. All rights reserved.</p>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
-    <script src="faceData.js"></script>
-    <script src="script.js"></script>
+    <script src="data/faceData.js"></script>
+    <script src="js/script.js"></script>
     <script>
         // Project Data
         const projects = {
