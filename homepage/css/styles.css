@@ -339,7 +339,7 @@ footer {
 @media (max-width: 768px) {
     .hero h1 { font-size: 12vw; }
     .split { flex-direction: column; gap: 3rem; }
-    .split.reverse { flex-direction: column; }
+    .split.reverse { flex-direction: column-reverse; }
     .split > * { width: 100%; }
     .section-title { font-size: 2.5rem; }
     .gs-viewer-placeholder { height: 50vh; }
