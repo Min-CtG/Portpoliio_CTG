@@ -552,8 +552,8 @@ f a d e B o b 
     
     /* FreeFrontend CSS Liquid Glass 효과 완벽 복사 (SVG 크로마틱 수차 필터 적용) */
     background: hsl(0 0% 0% / 0.15);
-    backdrop-filter: url(#glass-filter) blur(30px) saturate(1.2);
-    -webkit-backdrop-filter: url(#glass-filter) blur(30px) saturate(1.2);
+    backdrop-filter: url(#glass-filter) blur(15px) saturate(1.2);
+    -webkit-backdrop-filter: url(#glass-filter) blur(15px) saturate(1.2);
     
     /* 사이트에 있는 5겹의 3D 굴절 이너 쉐도우 (두꺼운 유리 볼륨감 형성) */
     box-shadow: 

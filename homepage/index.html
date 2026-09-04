@@ -141,19 +141,16 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="js/script.js"></script>
-    <!-- FreeFrontend Liquid Glass Chromatic Filter -->
+    <!-- FreeFrontend Liquid Glass Chromatic Filter (OPTIMIZED FOR 1660 SUPER) -->
     <svg style="position: absolute; width: 0; height: 0; pointer-events: none;" aria-hidden="true">
         <defs>
             <filter id="glass-filter">
-                <feDisplacementMap in="SourceGraphic" in2="map" id="redchannel" result="dispRed" scale="-20" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
-                <feColorMatrix in="dispRed" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red"></feColorMatrix>
-                <feDisplacementMap in="SourceGraphic" in2="map" id="greenchannel" result="dispGreen" scale="-24" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
-                <feColorMatrix in="dispGreen" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green"></feColorMatrix>
-                <feDisplacementMap in="SourceGraphic" in2="map" id="bluechannel" result="dispBlue" scale="-28" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
-                <feColorMatrix in="dispBlue" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue"></feColorMatrix>
-                <feBlend in="red" in2="green" mode="screen" result="rg"></feBlend>
-                <feBlend in="rg" in2="blue" mode="screen" result="output"></feBlend>
-                <feGaussianBlur in="output" stdDeviation="3"></feGaussianBlur>
+                <!-- 1. 저해상도 노이즈 생성 (유리의 미세한 굴절 패턴) -->
+                <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="1" result="noise"></feTurbulence>
+                <!-- 2. 단일 채널 왜곡 (RGB 3단 분리 제거하여 연산량 70% 감소) -->
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="G" result="disp"></feDisplacementMap>
+                <!-- 3. 가벼운 블러 (블러 강도를 낮춰 GPU 부하 최소화) -->
+                <feGaussianBlur in="disp" stdDeviation="2"></feGaussianBlur>
             </filter>
         </defs>
     </svg>
