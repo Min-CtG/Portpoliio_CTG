@@ -590,7 +590,7 @@ function createMiniScene(containerId, type = "signal") {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1));
     container.appendChild(renderer.domElement);
 
-    let particlesCount = type === 'space' ? 60000 : 25000;
+    let particlesCount = type === 'space' ? 25000 : 25000;
     let geometry;
 
     if (type === 'signal') {
@@ -602,7 +602,7 @@ function createMiniScene(containerId, type = "signal") {
     }
 
     const material = new THREE.PointsMaterial({
-        size: type === 'space' ? 0.9 : (type === 'artworks' ? 0.3 : 0.18), 
+        size: type === 'space' ? 1.3 : (type === 'artworks' ? 0.3 : 0.18), 
         map: splatTexture, 
         alphaTest: 0.01,
         vertexColors: true,
