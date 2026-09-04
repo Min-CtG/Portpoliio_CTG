@@ -39,7 +39,7 @@
         </ul>
     </div>
 
-    <!-- ???면??일??배경 캔버??추? (?크???구? ???먼?가 ?는 ?과) -->
+    <!-- ???�?????배경 캔버??�? (?????�? ???�?가 ????�? -->
     <canvas id="bg-canvas"></canvas>
 
     <div class="exhibition-hero" style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
@@ -192,7 +192,7 @@
                 <h3 id="modal-title" class="section-title">Artwork Title</h3>
                 
                 <div style="margin: 1.5rem auto; width: 100%; max-width: 800px; display: flex; align-items: center; justify-content: center;">
-                    <!-- ?기???제 ?품 ??지??으?요 -->
+                    <!-- ?�??????????지??????-->
                     <img id="modal-image" src="" alt="Artwork" style="width: 100%; max-height: 45vh; object-fit: contain; display: none; filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));">
                     <span id="modal-img-placeholder" style="padding: 4rem; color: #555;">[ Full Resolution Image Here ]</span>
                 </div>
@@ -217,7 +217,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
-    <!-- ?킹(CORS) 방??으?변?된 조각???이??-->
+    <!-- ???CORS) �????변???조각??????-->
     <script src="data/faceData.js"></script>
     <script src="data/lucyData.js"></script>
     <script src="js/script.js"></script>
@@ -352,5 +352,16 @@
             if (window.lenis) window.lenis.start();
         }
     </script>
+    <!-- FreeFrontend Liquid Glass Chromatic Filter (OPTIMIZED FOR 1660 SUPER) -->
+    <svg style="position: absolute; width: 0; height: 0; pointer-events: none;" aria-hidden="true">
+        <defs>
+            <filter id="glass-filter">
+                <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="1" result="noise"></feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="G" result="disp"></feDisplacementMap>
+                <feGaussianBlur in="disp" stdDeviation="2"></feGaussianBlur>
+            </filter>
+        </defs>
+    </svg>
 </body>
 </html>
+

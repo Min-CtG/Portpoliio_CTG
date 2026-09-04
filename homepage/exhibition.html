@@ -39,7 +39,7 @@
         </ul>
     </div>
 
-    <!-- ???면??일??배경 캔버??추? (?크???구? ???먼?가 ?는 ?과) -->
+    <!-- ???�?????배경 캔버??�? (?????�? ???�?가 ????�? -->
     <canvas id="bg-canvas"></canvas>
 
     <!-- Exhibition Header -->
@@ -175,5 +175,16 @@
             if (window.lenis) window.lenis.start();
         }
     </script>
+    <!-- FreeFrontend Liquid Glass Chromatic Filter (OPTIMIZED FOR 1660 SUPER) -->
+    <svg style="position: absolute; width: 0; height: 0; pointer-events: none;" aria-hidden="true">
+        <defs>
+            <filter id="glass-filter">
+                <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="1" result="noise"></feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="G" result="disp"></feDisplacementMap>
+                <feGaussianBlur in="disp" stdDeviation="2"></feGaussianBlur>
+            </filter>
+        </defs>
+    </svg>
 </body>
 </html>
+
