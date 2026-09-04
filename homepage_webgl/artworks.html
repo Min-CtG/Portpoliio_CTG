@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exhibition | 3D Gaussian Splatting</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+</head>
+<body class="artworks-page">
+    <!-- Navigation -->
+        <nav class="nav-glass" style="justify-content: flex-start; gap: 1.5rem;">
+        <div class="menu-btn" onclick="toggleSidebar()">
+            <div class="h-line"></div>
+            <div class="h-line"></div>
+            <div class="h-line"></div>
+        </div>
+        <div class="logo"><a href="index.html">CreatorTheGaphi<span>.</span></a></div>
+    </nav>
+
+    <!-- Sidebar Overlay -->
+    <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+    
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar" data-lenis-prevent>
+        <div class="sidebar-header">
+            <button class="close-btn" onclick="toggleSidebar()">Ã—</button>
+        </div>
+        <ul class="sidebar-links">
+            <li><a href="index.html#vision" onclick="toggleSidebar()">Vision</a></li>
+            <li><a href="exhibition.html">Exhibition</a></li>
+            <li><a href="artworks.html">Artworks</a></li>
+            <li><a href="index.html#commission" onclick="toggleSidebar()">Commission</a></li>
+        </ul>
+    </div>
+
+    <!-- ???ë©?????ë°°ê²½ ìº”ë²„??ì¶? (?????êµ? ???ë¨?ê°€ ????ê³? -->
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="exhibition-hero" style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
+        <h1 class="reveal-text">THE ARTWORKS</h1>
+        <p class="reveal-text" style="font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 1rem auto; text-align: center;">
+            A collection of traditional and digital paintings exploring color, form, and emotion.
+        </p>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator" style="position: absolute; bottom: 40px; display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0.6; animation: fadeBob 2s infinite;">
+            <span style="font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">Scroll Down</span>
+            <div style="width: 1px; height: 40px; background: currentColor;"></div>
+        </div>
+    </div>
+
+    <!-- Painting Grid (Card Deck Style) -->
+    <section class="portfolio-deck">
+        <div class="portfolio-card" onclick="openProject('art_proserpina')">
+            <div class="card-image-placeholder" style="background: url('assets/ARTWORKS/images/The Rape of Proserpina_thumb.webp') center/cover; position: relative;">
+            </div>
+            <div class="card-info" style="padding: 1.5rem;">
+                <p>2026</p>
+                <h3>The Rape of Proserpina</h3>
+            </div>
+        </div>
+        <div class="portfolio-card" onclick="openProject('art_aeneas')">
+            <div class="card-image-placeholder" style="background: url('assets/ARTWORKS/images/aeneas anchises and ascanius_thumb.webp') center/cover; position: relative;">
+            </div>
+            <div class="card-info" style="padding: 1.5rem;">
+                <p>2026</p>
+                <h3>Aeneas Anchises and Ascanius</h3>
+            </div>
+        </div>
+        <div class="portfolio-card" onclick="openProject('art_victory')">
+            <div class="card-image-placeholder" style="background: url('assets/ARTWORKS/images/angel with victory_thumb.webp') center/cover; position: relative;">
+            </div>
+            <div class="card-info" style="padding: 1.5rem;">
+                <p>2026</p>
+                <h3>Angel with Victory</h3>
+            </div>
+        </div>
+        <div class="portfolio-card" onclick="openProject('art_angel_08')">
+            <div class="card-image-placeholder" style="background: url('assets/ARTWORKS/images/angel_08-02_thumb.webp') center/cover; position: relative;">
+            </div>
+            <div class="card-info" style="padding: 1.5rem;">
+                <p>2026</p>
+                <h3>Angel 08-02</h3>
+            </div>
+        </div>
+        <div class="portfolio-card" onclick="openProject('art_anghel_02')">
+            <div class="card-image-placeholder" style="background: url('assets/ARTWORKS/images/anghel_02_thumb.webp') center/cover; position: relative;">
+            </div>
+            <div class="card-info" style="padding: 1.5rem;">
+                <p>2026</p>
+                <h3>Anghel 02</h3>
+            </div>
+        </div>
+        <div class="portfolio-card" onclick="openProject('art_pieta')">
+            <div class="card-image-placeholder" style="background: url('assets/ARTWORKS/images/pieta_thumb.webp') center/cover; position: relative;">
+            </div>
+            <div class="card-info" style="padding: 1.5rem;">
+                <p>2026</p>
+                <h3>Pieta</h3>
+            </div>
+        </div>
+        <div class="portfolio-card" onclick="openProject('art_bronze')">
+            <div class="card-image-placeholder" style="background: url('assets/ARTWORKS/images/the age of bronze_thumb.webp') center/cover; position: relative;">
+            </div>
+            <div class="card-info" style="padding: 1.5rem;">
+                <p>2026</p>
+                <h3>The Age of Bronze</h3>
+            </div>
+        </div>
+        <div class="portfolio-card" onclick="openProject('art_k1')">
+            <div class="card-image-placeholder" style="background: url('assets/ARTWORKS/images/KakaoTalk_20260831_123725447_01_thumb.webp') center/cover; position: relative;">
+            </div>
+            <div class="card-info" style="padding: 1.5rem;">
+                <p>2026</p>
+                <h3>Artwork 01</h3>
+            </div>
+        </div>
+        <div class="portfolio-card" onclick="openProject('art_k2')">
+            <div class="card-image-placeholder" style="background: url('assets/ARTWORKS/images/KakaoTalk_20260831_123725447_02_thumb.webp') center/cover; position: relative;">
+            </div>
+            <div class="card-info" style="padding: 1.5rem;">
+                <p>2026</p>
+                <h3>Artwork 02</h3>
+            </div>
+        </div>
+        <div class="portfolio-card" onclick="openProject('art_k3')">
+            <div class="card-image-placeholder" style="background: url('assets/ARTWORKS/images/KakaoTalk_20260831_123725447_03_thumb.webp') center/cover; position: relative;">
+            </div>
+            <div class="card-info" style="padding: 1.5rem;">
+                <p>2026</p>
+                <h3>Artwork 03</h3>
+            </div>
+        </div>
+        <div class="portfolio-card" onclick="openProject('art_k4')">
+            <div class="card-image-placeholder" style="background: url('assets/ARTWORKS/images/KakaoTalk_20260831_123725447_04_thumb.webp') center/cover; position: relative;">
+            </div>
+            <div class="card-info" style="padding: 1.5rem;">
+                <p>2026</p>
+                <h3>Artwork 04</h3>
+            </div>
+        </div>
+        <div class="portfolio-card" onclick="openProject('art_k5')">
+            <div class="card-image-placeholder" style="background: url('assets/ARTWORKS/images/KakaoTalk_20260831_123725447_05_thumb.webp') center/cover; position: relative;">
+            </div>
+            <div class="card-info" style="padding: 1.5rem;">
+                <p>2026</p>
+                <h3>Artwork 05</h3>
+            </div>
+        </div>
+        <div class="portfolio-card" onclick="openProject('art_k7')">
+            <div class="card-image-placeholder" style="background: url('assets/ARTWORKS/images/KakaoTalk_20260831_123725447_07_thumb.webp') center/cover; position: relative;">
+            </div>
+            <div class="card-info" style="padding: 1.5rem;">
+                <p>2026</p>
+                <h3>Artwork 07</h3>
+            </div>
+        </div>
+        <div class="portfolio-card" onclick="openProject('art_k8')">
+            <div class="card-image-placeholder" style="background: url('assets/ARTWORKS/images/KakaoTalk_20260831_123725447_08_thumb.webp') center/cover; position: relative;">
+            </div>
+            <div class="card-info" style="padding: 1.5rem;">
+                <p>2026</p>
+                <h3>Artwork 08</h3>
+            </div>
+        </div>
+        <div class="portfolio-card" onclick="openProject('art_k_cover')">
+            <div class="card-image-placeholder" style="background: url('assets/ARTWORKS/images/KakaoTalk_20260831_123725447_thumb.webp') center/cover; position: relative;">
+            </div>
+            <div class="card-info" style="padding: 1.5rem;">
+                <p>2026</p>
+                <h3>Artwork Collection</h3>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Modal Backdrop -->
+    <div id="modal-backdrop" class="modal-backdrop" onclick="closeProject()"></div>
+
+    <!-- Bottom Drawer Project Modal -->
+    <div id="project-modal" class="project-modal" data-lenis-prevent>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeProject()">Ã—</button>
+            <div class="text-block" style="text-align: center; margin-bottom: 4rem;">
+                <h2 id="modal-subtitle" class="section-subtitle">2024</h2>
+                <h3 id="modal-title" class="section-title">Artwork Title</h3>
+                
+                <div style="margin: 1.5rem auto; width: 100%; max-width: 800px; display: flex; align-items: center; justify-content: center;">
+                    <!-- ?ê¸??????????ì§€??????-->
+                    <img id="modal-image" src="" alt="Artwork" style="width: 100%; max-height: 45vh; object-fit: contain; display: none; filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));">
+                    <span id="modal-img-placeholder" style="padding: 4rem; color: #555;">[ Full Resolution Image Here ]</span>
+                </div>
+                
+                <p id="modal-desc" style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; max-width: 800px; margin: 0 auto;">
+                    Artwork description goes here.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Back to Main Button -->
+    <div class="back-to-main" style="display: flex; flex-direction: column; align-items: center; padding: 5rem 0 10rem 0; position: relative; z-index: 10;">
+        <div style="width: 1px; height: 150px; background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.7)); margin-bottom: 2rem;"></div>
+        <a href="index.html" class="btn-primary" style="background: transparent; border: 1px solid var(--primary-color);">BACK TO MAIN</a>
+    </div>
+    
+    <footer>
+        <p>&copy; 2026 CreatorTheGaphi. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+    <!-- ???CORS) ë°????ë³€???ì¡°ê°??????-->
+    <script src="data/faceData.js"></script>
+    <script src="data/lucyData.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        // Artwork Data
+        const artworks = {
+        'art_proserpina': {
+            sub: '2026',
+            title: 'The Rape of Proserpina',
+            desc: 'A digital restoration and exploration of form and space. Rendered in full high-fidelity 3D.',
+            image: 'assets/ARTWORKS/images/The Rape of Proserpina_full.webp'
+        },
+        'art_aeneas': {
+            sub: '2026',
+            title: 'Aeneas Anchises and Ascanius',
+            desc: 'A digital restoration and exploration of form and space. Rendered in full high-fidelity 3D.',
+            image: 'assets/ARTWORKS/images/aeneas anchises and ascanius_full.webp'
+        },
+        'art_victory': {
+            sub: '2026',
+            title: 'Angel with Victory',
+            desc: 'A digital restoration and exploration of form and space. Rendered in full high-fidelity 3D.',
+            image: 'assets/ARTWORKS/images/angel with victory_full.webp'
+        },
+        'art_angel_08': {
+            sub: '2026',
+            title: 'Angel 08-02',
+            desc: 'A digital restoration and exploration of form and space. Rendered in full high-fidelity 3D.',
+            image: 'assets/ARTWORKS/images/angel_08-02_full.webp'
+        },
+        'art_anghel_02': {
+            sub: '2026',
+            title: 'Anghel 02',
+            desc: 'A digital restoration and exploration of form and space. Rendered in full high-fidelity 3D.',
+            image: 'assets/ARTWORKS/images/anghel_02_full.webp'
+        },
+        'art_pieta': {
+            sub: '2026',
+            title: 'Pieta',
+            desc: 'A digital restoration and exploration of form and space. Rendered in full high-fidelity 3D.',
+            image: 'assets/ARTWORKS/images/pieta_full.webp'
+        },
+        'art_bronze': {
+            sub: '2026',
+            title: 'The Age of Bronze',
+            desc: 'A digital restoration and exploration of form and space. Rendered in full high-fidelity 3D.',
+            image: 'assets/ARTWORKS/images/the age of bronze_full.webp'
+        },
+        'art_k1': {
+            sub: '2026',
+            title: 'Artwork 01',
+            desc: 'A digital restoration and exploration of form and space. Rendered in full high-fidelity 3D.',
+            image: 'assets/ARTWORKS/images/KakaoTalk_20260831_123725447_01_full.webp'
+        },
+        'art_k2': {
+            sub: '2026',
+            title: 'Artwork 02',
+            desc: 'A digital restoration and exploration of form and space. Rendered in full high-fidelity 3D.',
+            image: 'assets/ARTWORKS/images/KakaoTalk_20260831_123725447_02_full.webp'
+        },
+        'art_k3': {
+            sub: '2026',
+            title: 'Artwork 03',
+            desc: 'A digital restoration and exploration of form and space. Rendered in full high-fidelity 3D.',
+            image: 'assets/ARTWORKS/images/KakaoTalk_20260831_123725447_03_full.webp'
+        },
+        'art_k4': {
+            sub: '2026',
+            title: 'Artwork 04',
+            desc: 'A digital restoration and exploration of form and space. Rendered in full high-fidelity 3D.',
+            image: 'assets/ARTWORKS/images/KakaoTalk_20260831_123725447_04_full.webp'
+        },
+        'art_k5': {
+            sub: '2026',
+            title: 'Artwork 05',
+            desc: 'A digital restoration and exploration of form and space. Rendered in full high-fidelity 3D.',
+            image: 'assets/ARTWORKS/images/KakaoTalk_20260831_123725447_05_full.webp'
+        },
+        'art_k7': {
+            sub: '2026',
+            title: 'Artwork 07',
+            desc: 'A digital restoration and exploration of form and space. Rendered in full high-fidelity 3D.',
+            image: 'assets/ARTWORKS/images/KakaoTalk_20260831_123725447_07_full.webp'
+        },
+        'art_k8': {
+            sub: '2026',
+            title: 'Artwork 08',
+            desc: 'A digital restoration and exploration of form and space. Rendered in full high-fidelity 3D.',
+            image: 'assets/ARTWORKS/images/KakaoTalk_20260831_123725447_08_full.webp'
+        },
+        'art_k_cover': {
+            sub: '2026',
+            title: 'Artwork Collection',
+            desc: 'A digital restoration and exploration of form and space. Rendered in full high-fidelity 3D.',
+            image: 'assets/ARTWORKS/images/KakaoTalk_20260831_123725447_full.webp'
+        },
+        };
+
+        const modal = document.getElementById('project-modal');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const modalSub = document.getElementById('modal-subtitle');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+        const modalImg = document.getElementById('modal-image');
+        const modalPlaceholder = document.getElementById('modal-img-placeholder');
+
+        function openProject(id) {
+            const data = artworks[id];
+            modalSub.innerText = data.sub;
+            modalTitle.innerText = data.title;
+            modalDesc.innerText = data.desc;
+            
+            if(data.image) {
+                modalImg.src = data.image;
+                modalImg.style.display = 'block';
+                modalPlaceholder.style.display = 'none';
+            } else {
+                modalImg.style.display = 'none';
+                modalPlaceholder.style.display = 'block';
+            }
+            
+            modal.classList.add('active');
+            modalBackdrop.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            if (window.lenis) window.lenis.stop();
+        }
+
+        function closeProject() {
+            modal.classList.remove('active');
+            modalBackdrop.classList.remove('active');
+            document.body.style.overflow = '';
+            if (window.lenis) window.lenis.start();
+        }
+    </script>
+    <!-- FreeFrontend Liquid Glass Chromatic Filter (OPTIMIZED FOR 1660 SUPER) -->
+    <svg style="position: absolute; width: 0; height: 0; pointer-events: none;" aria-hidden="true">
+        <defs>
+            <filter id="glass-filter">
+                <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="1" result="noise"></feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="G" result="disp"></feDisplacementMap>
+                <feGaussianBlur in="disp" stdDeviation="2"></feGaussianBlur>
+            </filter>
+        </defs>
+    </svg>
+</body>
+</html>
+

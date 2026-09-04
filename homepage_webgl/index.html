@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Gaussian Splatting | Art x Engineering</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400..800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+        <nav class="nav-glass" style="justify-content: flex-start; gap: 1.5rem;">
+        <div class="menu-btn" onclick="toggleSidebar()">
+            <div class="h-line"></div>
+            <div class="h-line"></div>
+            <div class="h-line"></div>
+        </div>
+        <div class="logo"><a href="index.html">CreatorTheGaphi<span>.</span></a></div>
+    </nav>
+
+    <!-- Sidebar Overlay -->
+    <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+    
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar" data-lenis-prevent>
+        <div class="sidebar-header">
+            <button class="close-btn" onclick="toggleSidebar()">×</button>
+        </div>
+        <ul class="sidebar-links">
+            <li><a href="index.html#vision" onclick="toggleSidebar()">Vision</a></li>
+            <li><a href="exhibition.html">Exhibition</a></li>
+            <li><a href="artworks.html">Artworks</a></li>
+            <li><a href="index.html#commission" onclick="toggleSidebar()">Commission</a></li>
+        </ul>
+    </div>
+
+    <!-- Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content" id="hero-content">
+            <h1 class="reveal-text">SCULPTING<br>REALITY</h1>
+            <p class="reveal-text hero-subtitle">Where Electronic Engineering meets High-End Aesthetics.</p>
+            <div class="reveal-text">
+                <a href="#commission" class="btn-primary">COMMISSION</a>
+            </div>
+        </div>
+        <div class="scroll-indicator" id="scroll-indicator">
+            <span>Scroll to discover</span>
+            <div class="line"></div>
+        </div>
+    </header>
+
+    <!-- Spacer to let the first sphere disappear -->
+    <div style="height: 60vh;"></div>
+
+    <!-- Vision Section 1: The Art of Signals -->
+    <section id="vision" class="section" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; margin-bottom: 20vh;">
+        <div class="container split">
+            <div class="text-block" data-speed="1.1">
+                <h2 class="section-subtitle">THE VISION</h2>
+                <h3 class="section-title">The Art of Signals</h3>
+                <p class="body-text">As an Electronic Engineer with a profound background in fine arts, I don't just see pixels; I see signals, mathematics, and raw aesthetic potential. My research in Computer Vision and <strong>3D Gaussian Splatting</strong> allows me to digitize the physical world with unprecedented photorealism.</p>
+                <p class="body-text">This is not just 3D modeling. This is the exact preservation of light, texture, and emotion.</p>
+            </div>
+            <div class="image-block" data-speed="0.9">
+                <!-- Mini canvas container (Human Form) -->
+                <div class="vision-box glassmorphism gs_reveal" id="mini-canvas-1"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 겹쳐 보이지 ?도????션 ?이???? ?백 추? -->
+    <div style="height: 30vh;"></div>
+
+    <!-- Vision Section 2: The Technology -->
+    <section class="section" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; margin-bottom: 20vh;">
+        <div class="container split reverse">
+            <div class="image-block" data-speed="1.1">
+                <!-- Mini canvas container -->
+                <div class="vision-box glassmorphism gs_reveal" id="mini-canvas-2"></div>
+            </div>
+            <div class="text-block" data-speed="0.9">
+                <h2 class="section-subtitle">THE TECHNOLOGY</h2>
+                <h3 class="section-title">Capturing Space</h3>
+                <p class="body-text">By combining the rigorous mathematical principles of Structure from Motion (SfM) with cutting-edge 3D Gaussian Splatting, I extract the physical world into the digital realm with uncompromised fidelity. Whether it is preserving the grand scale of luxury architectural spaces, or capturing the intricate mechanical elegance and bespoke material finishes of high-end automotive design, I transform static observations into fully navigable, real-time digital twins.</p>
+                <p class="body-text">This process goes beyond conventional 3D modeling. It is the exact preservation of spatial reality?where every specular reflection, organic curve, and subtle interplay of light is meticulously reconstructed and rendered instantaneously in the web browser.</p>
+                <a href="exhibition.html" class="btn-primary" style="margin-top: 2rem;">ENTER EXHIBITION</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ?션 ??립?을 ?해 ?일?게 ?? ?백 추? -->
+    <div style="height: 30vh;"></div>
+
+    
+    <!-- Vision Section 3: Artworks -->
+    <section class="section" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; margin-bottom: 20vh;">
+        <div class="container split">
+            <div class="text-block" data-speed="1.1">
+                <h2 class="section-subtitle">THE AESTHETICS</h2>
+                <h3 class="section-title">A Symphony of Colors</h3>
+                <p class="body-text">The digital space is a canvas where mathematics translates into fluid emotions. Through advanced 3D particle systems and dynamic rendering, I sculpt vibrant, living artworks that breathe and evolve in real-time.</p>
+                <p class="body-text">Experience a curated gallery of interactive, high-fidelity digital art where color, geometry, and motion merge into an immersive symphony.</p>
+                <a href="artworks.html" class="btn-primary" style="margin-top: 2rem;">ENTER ARTWORKS</a>
+            </div>
+            <div class="image-block" data-speed="0.9">
+                <!-- Mini canvas container -->
+                <div class="vision-box glassmorphism gs_reveal" id="mini-canvas-3"></div>
+            </div>
+        </div>
+    </section>
+
+    <div style="height: 30vh;"></div>
+
+    <!-- Commission Section -->
+    <section id="commission" class="section" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; margin-bottom: 20vh; padding-top: 5rem;">
+        <div class="container text-center gs_reveal" data-speed="1">
+            <h3 class="section-title">Commission a Digital Twin</h3>
+            <p class="body-text" style="margin: 0 auto 1.5rem auto;">Looking to immortalize a space, a vehicle, or an art piece? Or seeking top-tier Computer Vision talent for your next project?</p>
+            <a href="mailto:your.email@example.com" class="btn-primary">Start a Conversation</a>
+        </div>
+    </section>
+
+    
+    <!-- Back to Main Button -->
+    <div class="back-to-main" style="display: flex; flex-direction: column; align-items: center; padding: 5rem 0 10rem 0; position: relative; z-index: 10;">
+        <div style="width: 1px; height: 150px; background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.7)); margin-bottom: 2rem;"></div>
+        <a href="index.html" class="btn-primary" style="background: transparent; border: 1px solid var(--primary-color);">BACK TO MAIN</a>
+    </div>
+    
+    <footer>
+        <p>&copy; 2026 CreatorTheGaphi. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/script.js"></script>
+    <!-- FreeFrontend Liquid Glass Chromatic Filter (OPTIMIZED FOR 1660 SUPER) -->
+    <svg style="position: absolute; width: 0; height: 0; pointer-events: none;" aria-hidden="true">
+        <defs>
+            <filter id="glass-filter">
+                <!-- 1. 저해상도 노이즈 생성 (유리의 미세한 굴절 패턴) -->
+                <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="1" result="noise"></feTurbulence>
+                <!-- 2. 단일 채널 왜곡 (RGB 3단 분리 제거하여 연산량 70% 감소) -->
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="G" result="disp"></feDisplacementMap>
+                <!-- 3. 가벼운 블러 (블러 강도를 낮춰 GPU 부하 최소화) -->
+                <feGaussianBlur in="disp" stdDeviation="2"></feGaussianBlur>
+            </filter>
+        </defs>
+    </svg>
+</body>
+</html>

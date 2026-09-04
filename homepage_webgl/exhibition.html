@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exhibition | 3D Gaussian Splatting</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+</head>
+<body class="exhibition-page">
+    <!-- Navigation -->
+        <nav class="nav-glass" style="justify-content: flex-start; gap: 1.5rem;">
+        <div class="menu-btn" onclick="toggleSidebar()">
+            <div class="h-line"></div>
+            <div class="h-line"></div>
+            <div class="h-line"></div>
+        </div>
+        <div class="logo"><a href="index.html">CreatorTheGaphi<span>.</span></a></div>
+    </nav>
+
+    <!-- Sidebar Overlay -->
+    <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+    
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar" data-lenis-prevent>
+        <div class="sidebar-header">
+            <button class="close-btn" onclick="toggleSidebar()">Ã—</button>
+        </div>
+        <ul class="sidebar-links">
+            <li><a href="index.html#vision" onclick="toggleSidebar()">Vision</a></li>
+            <li><a href="exhibition.html">Exhibition</a></li>
+            <li><a href="artworks.html">Artworks</a></li>
+            <li><a href="index.html#commission" onclick="toggleSidebar()">Commission</a></li>
+        </ul>
+    </div>
+
+    <!-- ???ë©?????ë°°ê²½ ìº”ë²„??ì¶? (?????êµ? ???ë¨?ê°€ ????ê³? -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Exhibition Header -->
+    <header class="exhibition-header" style="height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; z-index: 2;">
+        <div class="container text-center reveal-text" data-speed="1.1">
+            <h1 class="section-title" style="font-size: 5rem; margin-bottom: 1rem;">THE EXHIBITION</h1>
+            <p class="body-text" style="font-size: 1.2rem; color: var(--text-muted);">Select a project to explore its digital twin.</p>
+        </div>
+    </header>
+
+    <!-- Card Deck (adamfuhrer.com style) -->
+    <div class="portfolio-deck gs_reveal">
+        
+        <!-- Card 1 -->
+        <div class="portfolio-card" onclick="openProject('arch')">
+            <div class="card-image-placeholder">
+                [ Architectural Thumbnail ]
+            </div>
+            <div class="card-info">
+                <p class="section-subtitle">PROJECT 01</p>
+                <h3>Architectural Visualization</h3>
+                <p>Luxury housing complexes in real-time.</p>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="portfolio-card" onclick="openProject('auto')">
+            <div class="card-image-placeholder">
+                [ Automotive Thumbnail ]
+            </div>
+            <div class="card-info">
+                <p class="section-subtitle">PROJECT 02</p>
+                <h3>Automotive Elegance</h3>
+                <p>Capturing complex mechanical engineering.</p>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="portfolio-card" onclick="openProject('human')">
+            <div class="card-image-placeholder">
+                [ Art Thumbnail ]
+            </div>
+            <div class="card-info">
+                <p class="section-subtitle">PROJECT 03</p>
+                <h3>The Human Form</h3>
+                <p>Volumetric capture of artistic structure.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal Backdrop -->
+    <div id="modal-backdrop" class="modal-backdrop" onclick="closeProject()"></div>
+
+    <!-- Bottom Drawer Project Modal -->
+    <div id="project-modal" class="project-modal" data-lenis-prevent>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeProject()">Ã—</button>
+            <div class="text-block" style="text-align: center; margin-bottom: 4rem;">
+                <h2 id="modal-subtitle" class="section-subtitle">PROJECT 01</h2>
+                <h3 id="modal-title" class="section-title">Architectural Visualization</h3>
+                <p id="modal-desc" class="body-text" style="margin: 0 auto; max-width: 800px;">Detailed project description goes here...</p>
+            </div>
+            
+            <div class="gs-viewer-placeholder glassmorphism" style="height: 70vh; margin-bottom: 2rem;">
+                <p style="font-size: 1.2rem;">3D GS Viewer / Video Area<br><small style="color: #666; font-size: 0.9rem;">Interactive Splat Viewer or Cinematic Video loads here</small></p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div class="gs-viewer-placeholder glassmorphism" style="height: 40vh;">[ Sub Image 1 ]</div>
+                <div class="gs-viewer-placeholder glassmorphism" style="height: 40vh;">[ Sub Image 2 ]</div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Back to Main Button -->
+    <div class="back-to-main" style="display: flex; flex-direction: column; align-items: center; padding: 5rem 0 10rem 0; position: relative; z-index: 10;">
+        <div style="width: 1px; height: 150px; background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.7)); margin-bottom: 2rem;"></div>
+        <a href="index.html" class="btn-primary" style="background: transparent; border: 1px solid var(--primary-color);">BACK TO MAIN</a>
+    </div>
+    
+    <footer>
+        <p>&copy; 2026 CreatorTheGaphi. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+    <script src="data/faceData.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        // Project Data
+        const projects = {
+            'arch': {
+                sub: 'PROJECT 01',
+                title: 'Architectural Visualization',
+                desc: 'By capturing large-scale luxury properties with drone photogrammetry and ground-level LIDAR, this project demonstrates the ability of 3D Gaussian Splatting to render massive architectural environments at 60FPS. Walk through future blueprints in uncompromised photorealism.'
+            },
+            'auto': {
+                sub: 'PROJECT 02',
+                title: 'Automotive Elegance',
+                desc: 'A study in specular reflections and metallic surfaces. This project captures the bespoke material finishes of high-end vehicles. Unlike traditional photogrammetry, 3DGS perfectly preserves the anisotropic highlights and clearcoat reflections of automotive paint.'
+            },
+            'human': {
+                sub: 'PROJECT 03',
+                title: 'The Human Form',
+                desc: 'Exploring the intersection of biology and computer vision. This dataset captures the intricate folds of fabric and subtle skin scattering of human subjects, providing a deeply artistic volumetric preservation of a fleeting moment.'
+            }
+        };
+
+        const modal = document.getElementById('project-modal');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const modalSub = document.getElementById('modal-subtitle');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+
+        function openProject(id) {
+            const data = projects[id];
+            modalSub.innerText = data.sub;
+            modalTitle.innerText = data.title;
+            modalDesc.innerText = data.desc;
+            
+            modal.classList.add('active');
+            modalBackdrop.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            if (window.lenis) window.lenis.stop();
+        }
+
+        function closeProject() {
+            modal.classList.remove('active');
+            modalBackdrop.classList.remove('active');
+            document.body.style.overflow = '';
+            if (window.lenis) window.lenis.start();
+        }
+    </script>
+    <!-- FreeFrontend Liquid Glass Chromatic Filter (OPTIMIZED FOR 1660 SUPER) -->
+    <svg style="position: absolute; width: 0; height: 0; pointer-events: none;" aria-hidden="true">
+        <defs>
+            <filter id="glass-filter">
+                <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="1" result="noise"></feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="G" result="disp"></feDisplacementMap>
+                <feGaussianBlur in="disp" stdDeviation="2"></feGaussianBlur>
+            </filter>
+        </defs>
+    </svg>
+</body>
+</html>
+
