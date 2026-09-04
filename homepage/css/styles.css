@@ -61,19 +61,24 @@ nav.nav-glass {
     align-items: center;
     z-index: 100;
     
-    /* 최적화된 리퀴드 글라스 (Liquid Glass) 효과 */
-    background: rgba(10, 10, 15, 0.25);
-    backdrop-filter: blur(20px) saturate(1.4);
-    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    /* 완벽한 0프레임 드랍 리퀴드 글라스 (backdrop-filter 완벽 제거) */
+    /* WebGL(3D 캔버스) 위에 blur를 얹으면 GPU 병목이 생기므로, 그라데이션과 투명도로 유리 질감을 착시시킴 */
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.03) 40%,
+        rgba(255, 255, 255, 0.0) 50%,
+        rgba(255, 255, 255, 0.02) 60%,
+        rgba(255, 255, 255, 0.05) 100%
+    ), rgba(10, 15, 25, 0.6);
     
-    /* 빛의 굴절과 반사를 모방하는 다중 Specular Highlight (SVG 없이 CSS 쉐도우로만 구현하여 프레임 드랍 0%) */
+    /* 빛 반사 (Specular Highlight) */
     box-shadow: 
-        inset 0 1px 1px 0 rgba(255, 255, 255, 0.15),
-        inset 0 -1px 2px 0 rgba(255, 255, 255, 0.05),
-        0 10px 40px -10px rgba(0, 0, 0, 0.8);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-    contain: layout paint; /* 렌더링 최적화 격리 (size 속성은 빼서 높이 찌그러짐 방지) */
-    will-change: transform; /* 별도 GPU 레이어로 승격시켜 렉 방지 */
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -1px 2px 0 rgba(255, 255, 255, 0.1),
+        0 10px 40px -10px rgba(0, 0, 0, 0.9);
+        
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .logo {
