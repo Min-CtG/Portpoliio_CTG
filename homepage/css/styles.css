@@ -544,18 +544,28 @@ f a d e B o b 
     left: -350px;
     width: 300px;
     height: 100vh;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%), rgba(10, 15, 25, 0.4);
     z-index: 999;
     transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
     display: flex;
     flex-direction: column;
     padding: 3rem 2rem;
-    backdrop-filter: blur(25px) saturate(150%);
-    -webkit-backdrop-filter: blur(25px) saturate(150%);
+    
+    /* FreeFrontend CSS Liquid Glass 효과 완벽 복사 (SVG 크로마틱 수차 필터 적용) */
+    background: hsl(0 0% 0% / 0.15);
+    backdrop-filter: url(#glass-filter) blur(30px) saturate(1.2);
+    -webkit-backdrop-filter: url(#glass-filter) blur(30px) saturate(1.2);
+    
+    /* 사이트에 있는 5겹의 3D 굴절 이너 쉐도우 (두꺼운 유리 볼륨감 형성) */
     box-shadow: 
-        inset -1px 0 2px 0 rgba(255, 255, 255, 0.1),
+        inset 0 0 2px 1px #ffffff59, 
+        inset 0 0 10px 4px #ffffff26, 
+        inset 0 4px 16px #11111a0d, 
+        inset 0 8px 24px #11111a0d, 
+        inset 0 6px 56px #11111a0d,
         10px 0 40px rgba(0, 0, 0, 0.8);
+    
+    border: none;
+    border-radius: 0 30px 30px 0; /* 샘플의 둥근 알약 형태처럼 사이드바 모서리 둥글게 */
     will-change: transform;
 }
 .sidebar.active {
